@@ -10,7 +10,8 @@ class UserController {
     }
 
     async check(req, res) {
-        res.status(200).json({messgage:'auth works'})
+        const query = req.query
+        res.json(query)
     }
 }
 
