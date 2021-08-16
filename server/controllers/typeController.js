@@ -7,18 +7,18 @@ class TypeController{
         const { name } = req.body;
         try {
             const type = await Type.create({ name })
-            res.json(type)
+           return  res.json(type)
         } catch (error) {
-            res.status(500).json(error.message)
+            return res.status(500).json(error.message)
         }
        
     }
     async getAll(req, res) {
         try {
             const types = await Type.findAll()
-            res.json(types)
+            return res.json(types)
         } catch (error) {
-            res.status(500).json(error.message)
+            return res.status(500).json(error.message)
         }
     }
   

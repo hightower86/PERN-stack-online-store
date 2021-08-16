@@ -4,9 +4,9 @@ class BrandController{
     async getAll(req, res) {
         try {
             const brands = await Brand.findAll()
-        res.json(brands)  
+        return res.json(brands)  
         } catch (error) {
-            res.status(500).json(error.message)
+            return res.status(500).json(error.message)
         }
       
 
@@ -14,9 +14,9 @@ class BrandController{
     async create(req, res) {
         try {
             const brand = await Brand.create({ name: req.body.name })
-            res.json(brand)
+            return res.json(brand)
         } catch (e) {
-            res.status(500).json(e.message)
+            return res.status(500).json(e.message)
         }
     }
   
