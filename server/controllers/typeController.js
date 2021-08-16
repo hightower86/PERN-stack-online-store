@@ -1,9 +1,25 @@
+const { Type } = require("../models/models");
+
+
 class TypeController{
-    async getAll(req, res) {
-        res.status(200).json({message:'get types works'})
-    }
+   
     async create(req, res) {
-        res.status(200).json({message:'create new type works'})
+        const { name } = req.body;
+        try {
+            const type = await Type.create({ name })
+            res.json(type)
+        } catch (error) {
+            res.status(500).json(error.message)
+        }
+       
+    }
+    async getAll(req, res) {
+        try {
+            const types = await Type.findAll()
+            res.json(types)
+        } catch (error) {
+            res.status(500).json(error.message)
+        }
     }
   
 }

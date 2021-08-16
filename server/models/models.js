@@ -37,11 +37,11 @@ const Rating = sequelize.define('rating', {
 })
 const Type = sequelize.define('type', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    name: {type:DataTypes.STRING, allowNull:false}
+    name: {type:DataTypes.STRING, allowNull:false,unique:true}
 })
 const Brand = sequelize.define('brand', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    name: {type:DataTypes.STRING, allowNull:false}
+    name: {type:DataTypes.STRING, allowNull:false,unique:true}
 })
 const TypeBrand = sequelize.define('type_brand', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
