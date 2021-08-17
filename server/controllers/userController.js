@@ -3,6 +3,14 @@ const {User,Basket} = require('../models/models')
 const ApiError = require('../error/ApiError')
 const jwt = require('jsonwebtoken')
 
+const generateJWT = (id, email, role) => {
+return jwt.sign(
+            { id, email, role },
+            process.env.SECRET_KEY,
+            { expiresIn: '24h' }
+        )
+}
+
 class UserController {
 
     async registration(req, res, next) {
@@ -24,17 +32,28 @@ class UserController {
         
         const basket = await Basket.create({userId:user.id})
         
-        const token = jwt.sign(
-            { id: user.id, email, role },
-            process.env.SECRET_KEY,
-            { expiresIn: '24h' }
-        )
+        const token = generateJWT(user.id ,user.email, user.role)
         
         return res.json({ token })
     }
 
-    async login(req, res) {
-        res.status(200).json({messgage:'login works'})
+    async login(req, res, next) {
+        const { email, password } = req.body
+        const user = await User.findOne({where: { email}})
+        
+        if (!user) {
+           return next(ApiError.internal('User with this email not found'))
+        }
+
+        let comparePassword = bcrypt.compareSync(password, user.password)
+
+        if (!comparePassword) {
+           return next(ApiError.internal('Invalid password'))
+        }
+
+        const token = generateJWT(user.id, user.email, user.role)
+
+        res.status(201).json(token)
     }
 
     async check(req, res,next) {
