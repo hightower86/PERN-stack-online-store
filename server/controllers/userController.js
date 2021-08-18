@@ -56,12 +56,11 @@ class UserController {
         res.status(201).json(token)
     }
 
-    async check(req, res,next) {
-        const { id } = req.query
-        if (!id) {
-            next(ApiError.badRequest('Id is required'))
-        }
-        res.json(id)
+    async check(req, res, next) {
+        
+        const token = generateJWT(req.user.id, req.user.email, req.user.role)
+
+       return res.json(token)
     }
 }
 
