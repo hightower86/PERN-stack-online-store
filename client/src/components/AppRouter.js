@@ -1,11 +1,12 @@
-import React, { useContext } from 'react'
+import { observer } from 'mobx-react-lite'
+import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
-import { Context } from '..'
 import { authRoutes, publicRoutes } from '../routes'
+import UserStore from '../store/UserStore'
 import { SHOP_ROUTE } from '../utils/constants'
 
 const AppRouter = () => {
-    const { user } = useContext(Context)
+    const { user } = UserStore
     console.log({ user })
     return (
         <Switch>
@@ -20,4 +21,4 @@ const AppRouter = () => {
     )
 }
 
-export default AppRouter
+export default observer(AppRouter)
