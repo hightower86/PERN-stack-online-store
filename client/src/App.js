@@ -1,8 +1,8 @@
-import React from 'react'
-import { BrowserRouter } from 'react-router-dom'
-import AppRouter from './components/AppRouter'
-import styled from 'styled-components'
-import NavBar from './components/NavBar'
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
+import AppRouter from "./components/AppRouter";
+import styled from "styled-components";
+import NavBar from "./components/NavBar";
 
 const AppContainer = styled.div`
   /* padding:20px; */
@@ -11,8 +11,7 @@ const AppContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`
-
+`;
 
 function App() {
   return (
@@ -22,7 +21,7 @@ function App() {
         <AppRouter />
       </AppContainer>
     </BrowserRouter>
-  )
+  );
 }
 
-export default App
+export default App;
