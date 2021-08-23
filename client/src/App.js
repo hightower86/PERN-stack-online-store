@@ -18,6 +18,7 @@ function App() {
     <BrowserRouter>
       <AppContainer>
         <NavBar />
+        <NavBar />
         <AppRouter />
       </AppContainer>
     </BrowserRouter>
