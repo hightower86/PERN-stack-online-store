@@ -12,6 +12,10 @@ class DeviceStore {
   brands = [
     { id: 1, name: "Apple" },
     { id: 2, name: "Samsung" },
+    { id: 3, name: "Xiaomi" },
+    { id: 4, name: "Bork" },
+    { id: 5, name: "Indesit" },
+    { id: 6, name: "Gorenje" },
   ];
   devices = [
     {
@@ -52,14 +56,17 @@ class DeviceStore {
   ];
 
   selectedType = {};
+  selectedBrand = {};
 
   constructor() {
     makeAutoObservable(this);
   }
 
   setSelectedType(type) {
-    console.log("setting type", type);
     this.selectedType = type;
+  }
+  setSelectedBrand(brand) {
+    this.selectedBrand = brand;
   }
 }
 

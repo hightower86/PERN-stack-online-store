@@ -11,12 +11,10 @@ const Bar = styled.div`
 
 const TypeItem = styled.div`
   padding: 10px;
-  background-color: ${(props) => (props.active ? "lightgray" : "white")};
+  background-color: ${(props) => (props.active ? "lightgray" : "lightyellow")};
   margin-bottom: 5px;
   &:hover {
     cursor: pointer;
-    /* background-color: lightgray; */
-    color: white;
     box-shadow: 2px 2px 5px white;
   }
 `;
