@@ -1,17 +1,17 @@
 import { observer } from "mobx-react-lite";
-import React from "react";
+import React, { useContext } from "react";
 import BrandsBar from "../components/BrandsBar";
 import TypesBar from "../components/TypesBar";
 
 import deviceStore from "../store/DeviceStore";
-import Device from "./DeviceItem";
+import Device from "../components/DeviceItem";
 import styled from "styled-components";
+import { useStore } from "../store";
+import { Context } from "..";
 
 const Row = styled.div`
   height: 90vh;
   display: flex;
-  /* width: 100%; */
-  /* gap: 10px; */
 `;
 
 const Left = styled.div`
@@ -28,12 +28,23 @@ const Right = styled.div`
 const DevicesContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 10px;
+  padding: 10px;
 `;
 
 const Shop = () => {
-  const { devices } = deviceStore;
+  // const {
+  //   deviceStore: { devices },
+  //   userStore: { isAuth },
+  // } = useStore();
+  const {
+    deviceStore: { devices },
+    userStore: { isAuth },
+  } = useContext(Context);
+
   console.log("devices", devices);
+  console.log("isAuth", isAuth);
+
   return (
     <Row>
       <Left>

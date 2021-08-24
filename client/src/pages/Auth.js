@@ -41,7 +41,7 @@ const Auth = () => {
     <Container>
       <FormContainer>
         {isLogin ? <h2>Авторизация</h2> : <h2>Регистрация</h2>}
-        <Form>
+        <Form onSubmit={(e) => e.preventDefault()}>
           <Input type="text" name="email" placeholder="email" />
           <Input type="text" name="password" placeholder="password" />
           <Button type="submit">{isLogin ? "Войти" : "Регистрация"}</Button>

@@ -1,13 +1,15 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useContext } from "react";
+import { NavLink, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../UI/Button";
-import { LOGIN_ROUTE, SHOP_ROUTE } from "../utils/constants";
+import { ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from "../utils/constants";
 
-import userStore from "../store/UserStore";
 import { observer } from "mobx-react-lite";
+// import { StoreContext, useStore } from "../store";
+import { Context } from "..";
 
 const NavContainer = styled.div`
+  z-index: 100;
   width: 100%;
   padding: 0 20px;
   min-height: 40px;
@@ -28,19 +30,39 @@ const ButtonsContainer = styled.div`
 `;
 
 const NavBar = () => {
-  const { isAuth } = userStore;
+  const history = useHistory();
+
+  // const {
+  //   userStore: { isAuth, setIsAuth, user },
+  // } = useStore();
+
+  const {
+    userStore, //: { isAuth, setIsAuth },
+  } = useContext(Context);
+  const { isAuth, setIsAuth } = userStore;
+
   console.log({ userStore });
+
   return (
     <NavContainer>
       <StyledNavLink to={SHOP_ROUTE}>Shop</StyledNavLink>
       <StyledNavLink to={LOGIN_ROUTE}>Login</StyledNavLink>
       <ButtonsContainer>
-        {isAuth && <Button>Админ панель</Button>}
-        {!isAuth && (
-          <Button onClick={() => userStore.setIsAuth(true)}>Войти </Button>
-        )}
         {isAuth && (
-          <Button onClick={() => userStore.setIsAuth(false)}>Выйти</Button>
+          <Button onClick={() => history.push(ADMIN_ROUTE)}>
+            Админ панель
+          </Button>
+        )}
+        {!isAuth && <Button onClick={() => setIsAuth(true)}>Войти </Button>}
+        {isAuth && (
+          <Button
+            onClick={() => {
+              history.push(LOGIN_ROUTE);
+              setIsAuth(false);
+            }}
+          >
+            Выйти
+          </Button>
         )}
       </ButtonsContainer>
     </NavContainer>

@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
 
-class DeviceStore {
+export default class DeviceStore {
   types = [
     { id: 1, name: "Холодильники" },
     { id: 2, name: "Телевизоры" },
@@ -59,7 +59,7 @@ class DeviceStore {
   selectedBrand = {};
 
   constructor() {
-    makeAutoObservable(this);
+    makeAutoObservable(this, {}, { autoBind: true });
   }
 
   setSelectedType(type) {
@@ -69,5 +69,3 @@ class DeviceStore {
     this.selectedBrand = brand;
   }
 }
-
-export default new DeviceStore();

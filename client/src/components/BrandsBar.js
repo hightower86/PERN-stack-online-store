@@ -1,7 +1,8 @@
 import { observer } from "mobx-react-lite";
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
-import deviceStore from "../store/DeviceStore";
+import { Context } from "..";
+// import { useStore } from "../store";
 
 const BrandsList = styled.div`
   display: flex;
@@ -22,14 +23,19 @@ const BrandItem = styled.div`
 `;
 
 const BrandsBar = () => {
-  const { brands } = deviceStore;
+  // const {
+  //   deviceStore: { brands, selectedBrand, setSelectedBrand },
+  // } = useStore();
+  const {
+    deviceStore: { brands, selectedBrand, setSelectedBrand },
+  } = useContext(Context);
   return (
     <BrandsList>
       {brands.map((b) => (
         <BrandItem
           key={b.id}
-          active={b.id === deviceStore.selectedBrand.id}
-          onClick={() => deviceStore.setSelectedBrand(b)}
+          active={b.id === selectedBrand.id}
+          onClick={() => setSelectedBrand(b)}
         >
           {b.name}
         </BrandItem>

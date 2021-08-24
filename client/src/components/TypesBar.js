@@ -1,7 +1,8 @@
 import { observer } from "mobx-react-lite";
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
-import deviceStore from "../store/DeviceStore";
+import { Context } from "..";
+import { useStore } from "../store";
 
 const Bar = styled.div`
   height: 90vh;
@@ -20,16 +21,21 @@ const TypeItem = styled.div`
 `;
 
 const TypesBar = () => {
-  const { types } = deviceStore;
+  const {
+    deviceStore: { types, selectedType, setSelectedType },
+  } = useContext(Context);
+  // const {
+  //   deviceStore: { types, selectedType, setSelectedType },
+  // } = useStore();
   return (
     <Bar>
       {types.map((t) => (
         <TypeItem
           key={t.id}
           onClick={() => {
-            deviceStore.setSelectedType(t);
+            setSelectedType(t);
           }}
-          active={deviceStore.selectedType.id === t.id}
+          active={selectedType.id === t.id}
         >
           {t.name}
         </TypeItem>

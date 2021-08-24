@@ -1,15 +1,25 @@
 import { observer } from "mobx-react-lite";
-import React from "react";
+import React, { useContext } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
+import { Context } from "..";
 import { authRoutes, publicRoutes } from "../routes";
-import UserStore from "../store/UserStore";
+// import { useStore } from "../store";
 import { SHOP_ROUTE } from "../utils/constants";
 
 const AppRouter = () => {
-  const { user } = UserStore;
+  // const {
+  //   userStore: { user, isAuth },
+  // } = useStore();
+
+  const {
+    userStore: { isAuth },
+  } = useContext(Context);
+
+  console.log("AppRouter rendered");
+  console.log("isAuth", isAuth);
   return (
     <Switch>
-      {user.isAuth &&
+      {isAuth &&
         authRoutes.map(({ path, Component }) => {
           return <Route key={path} path={path} component={Component} exact />;
         })}
