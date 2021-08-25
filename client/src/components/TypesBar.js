@@ -1,7 +1,6 @@
 import { observer } from "mobx-react-lite";
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
-import { Context } from "..";
 import { useStore } from "../store";
 
 const Bar = styled.div`
@@ -23,10 +22,8 @@ const TypeItem = styled.div`
 const TypesBar = () => {
   const {
     deviceStore: { types, selectedType, setSelectedType },
-  } = useContext(Context);
-  // const {
-  //   deviceStore: { types, selectedType, setSelectedType },
-  // } = useStore();
+  } = useStore();
+
   return (
     <Bar>
       {types.map((t) => (

@@ -1,15 +1,16 @@
 import React, { createContext, useContext } from "react";
+import { store } from "..";
 import DeviceStore from "./DeviceStore";
 import UserStore from "./UserStore";
 
-// class RootStore {
-//   constructor() {
-//     this.userStore = new UserStore();
-//     this.deviceStore = new DeviceStore();
-//     // this.basketStore = new BasketStore(this);
-//     // this.paginationStore = new PaginationStore(this);
-//   }
-// }
+class RootStore {
+  constructor() {
+    this.userStore = new UserStore();
+    this.deviceStore = new DeviceStore();
+  }
+}
+
+const StoreContext = createContext(store);
 
 const useStore = () => {
   const context = useContext(StoreContext);
@@ -18,16 +19,6 @@ const useStore = () => {
   }
   return context;
 };
-
-// const store = new RootStore();
-
-const RootStore = {
-  userStore: new UserStore(),
-  deviceStore: new DeviceStore(),
-};
-
-// const StoreContext = createContext(new RootStore());
-export const StoreContext = createContext(RootStore);
 
 const StoreProvider = ({ store, children }) => {
   return (

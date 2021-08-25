@@ -1,12 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../UI/Button";
 import { ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from "../utils/constants";
 
 import { observer } from "mobx-react-lite";
-// import { StoreContext, useStore } from "../store";
-import { Context } from "..";
+import { useStore } from "../store";
 
 const NavContainer = styled.div`
   z-index: 100;
@@ -32,16 +31,9 @@ const ButtonsContainer = styled.div`
 const NavBar = () => {
   const history = useHistory();
 
-  // const {
-  //   userStore: { isAuth, setIsAuth, user },
-  // } = useStore();
-
   const {
-    userStore, //: { isAuth, setIsAuth },
-  } = useContext(Context);
-  const { isAuth, setIsAuth } = userStore;
-
-  console.log({ userStore });
+    userStore: { isAuth, setIsAuth, user },
+  } = useStore();
 
   return (
     <NavContainer>

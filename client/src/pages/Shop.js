@@ -1,13 +1,11 @@
 import { observer } from "mobx-react-lite";
-import React, { useContext } from "react";
+import React from "react";
 import BrandsBar from "../components/BrandsBar";
 import TypesBar from "../components/TypesBar";
 
-import deviceStore from "../store/DeviceStore";
 import Device from "../components/DeviceItem";
 import styled from "styled-components";
 import { useStore } from "../store";
-import { Context } from "..";
 
 const Row = styled.div`
   height: 90vh;
@@ -33,17 +31,9 @@ const DevicesContainer = styled.div`
 `;
 
 const Shop = () => {
-  // const {
-  //   deviceStore: { devices },
-  //   userStore: { isAuth },
-  // } = useStore();
   const {
     deviceStore: { devices },
-    userStore: { isAuth },
-  } = useContext(Context);
-
-  console.log("devices", devices);
-  console.log("isAuth", isAuth);
+  } = useStore();
 
   return (
     <Row>
