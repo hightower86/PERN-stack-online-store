@@ -8,7 +8,7 @@ export default class UserStore {
   }
 
   setIsAuth(bool) {
-    console.log("SetIsAuth fired", "this.isAuth:", this._isAuth);
+    console.log("SetIsAuth fired", "this.isAuth:", this.isAuth);
     this.isAuth = bool;
   }
 

@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from "react";
-import { store } from "..";
+//import { store } from "..";
 import DeviceStore from "./DeviceStore";
 import UserStore from "./UserStore";
 
@@ -10,7 +10,7 @@ class RootStore {
   }
 }
 
-const StoreContext = createContext(store);
+const StoreContext = createContext(new RootStore());
 
 const useStore = () => {
   const context = useContext(StoreContext);
