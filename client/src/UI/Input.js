@@ -10,8 +10,8 @@ const StyledInput = styled.input`
   margin: 10px 0;
 `;
 
-const Input = ({ type, placeholder, value }) => {
-  return <StyledInput type={type} placeholder={placeholder} value={value} />;
+const Input = ({ ...props }) => {
+  return <StyledInput {...props} />;
 };
 
 export default Input;

@@ -1,4 +1,3 @@
-import { set } from "mobx";
 import React, { useState } from "react";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
 import styled from "styled-components";
@@ -42,7 +41,7 @@ const Input = styled.input`
 
 const Auth = () => {
   const {
-    userStore: { user, setUser, setIsAuth },
+    userStore: { setUser, setIsAuth },
   } = useStore();
   const location = useLocation();
   const isLogin = location.pathname === LOGIN_ROUTE;

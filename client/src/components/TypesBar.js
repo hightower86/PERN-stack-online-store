@@ -1,6 +1,7 @@
 import { observer } from "mobx-react-lite";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { fetchTypes } from "../http/deviceApi";
 import { useStore } from "../store";
 
 const Bar = styled.div`
@@ -21,8 +22,20 @@ const TypeItem = styled.div`
 
 const TypesBar = () => {
   const {
-    deviceStore: { types, selectedType, setSelectedType },
+    deviceStore: { types, selectedType, setSelectedType, setTypes },
   } = useStore();
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      fetchTypes()
+        .then((data) => setTypes(data))
+        .then(() => setLoading(false));
+    }, 2000);
+  }, []);
+
+  if (loading) return <h2>Loading...</h2>;
 
   return (
     <Bar>

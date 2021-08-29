@@ -2,20 +2,20 @@ import { makeAutoObservable } from "mobx";
 
 export default class DeviceStore {
   types = [
-    { id: 1, name: "Холодильники" },
-    { id: 2, name: "Телевизоры" },
-    { id: 3, name: "Компьютеры" },
-    { id: 4, name: "Ноутбуки" },
-    { id: 5, name: "Пылесосы" },
-    { id: 6, name: "Стиральные машины" },
+    // { id: 1, name: "Холодильники" },
+    // { id: 2, name: "Телевизоры" },
+    // { id: 3, name: "Компьютеры" },
+    // { id: 4, name: "Ноутбуки" },
+    // { id: 5, name: "Пылесосы" },
+    // { id: 6, name: "Стиральные машины" },
   ];
   brands = [
-    { id: 1, name: "Apple" },
-    { id: 2, name: "Samsung" },
-    { id: 3, name: "Xiaomi" },
-    { id: 4, name: "Bork" },
-    { id: 5, name: "Indesit" },
-    { id: 6, name: "Gorenje" },
+    // { id: 1, name: "Apple" },
+    // { id: 2, name: "Samsung" },
+    // { id: 3, name: "Xiaomi" },
+    // { id: 4, name: "Bork" },
+    // { id: 5, name: "Indesit" },
+    // { id: 6, name: "Gorenje" },
   ];
   devices = [
     {
@@ -67,5 +67,12 @@ export default class DeviceStore {
   }
   setSelectedBrand(brand) {
     this.selectedBrand = brand;
+  }
+
+  setTypes(types) {
+    this.types = types;
+  }
+  setBrands(brands) {
+    this.brands = brands;
   }
 }
