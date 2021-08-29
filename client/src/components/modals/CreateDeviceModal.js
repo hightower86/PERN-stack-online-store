@@ -32,9 +32,7 @@ const CreateDeviceModal = ({ show, closeAction }) => {
   };
 
   const deleteInfoItem = (num) => {
-    const filteredInfo = info.filter((info) => {
-      return info.number !== num;
-    });
+    const filteredInfo = info.filter((i) => i.number !== num);
     return setInfo(filteredInfo);
   };
 

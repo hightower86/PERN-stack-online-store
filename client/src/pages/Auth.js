@@ -1,6 +1,9 @@
-import React from "react";
+import { set } from "mobx";
+import React, { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import styled from "styled-components";
+import { login, registration } from "../http/userApi";
+import { useStore } from "../store";
 import Button from "../UI/Button";
 import { LOGIN_ROUTE, REGISTRATION_ROUTE } from "../utils/constants";
 
@@ -34,16 +37,56 @@ const Input = styled.input`
 `;
 
 const Auth = () => {
+  const {
+    userStore: { user, setUser, setIsAuth },
+  } = useStore();
   const location = useLocation();
   const isLogin = location.pathname === LOGIN_ROUTE;
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const click = async () => {
+    let data;
+    try {
+      if (isLogin) {
+        data = await login({ email, password });
+      } else {
+        data = await registration({ email, password });
+      }
+    } catch (e) {
+      window.alert(e.response?.data?.message);
+    }
+    setUser(data);
+    setIsAuth(true);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    click();
+    setEmail("");
+    setPassword("");
+  };
 
   return (
     <Container>
       <FormContainer>
         {isLogin ? <h2>Авторизация</h2> : <h2>Регистрация</h2>}
-        <Form onSubmit={(e) => e.preventDefault()}>
-          <Input type="text" name="email" placeholder="email" />
-          <Input type="text" name="password" placeholder="password" />
+        <Form onSubmit={handleSubmit}>
+          <Input
+            type="text"
+            name="email"
+            placeholder="email"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+          />
+          <Input
+            type="password"
+            name="password"
+            placeholder="password"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+          />
           <Button type="submit">{isLogin ? "Войти" : "Регистрация"}</Button>
           {isLogin ? "Нет аккаунта?" : "Уже есть аккаунт?"}
           {isLogin && (

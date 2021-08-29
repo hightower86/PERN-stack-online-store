@@ -6,6 +6,8 @@ import { RootStore, StoreProvider } from "./store";
 
 export const store = new RootStore();
 
+console.log(process.env.REACT_APP_API_URL);
+
 ReactDOM.render(
   <StoreProvider store={store}>
     <App />
