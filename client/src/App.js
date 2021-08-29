@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import AppRouter from "./components/AppRouter";
 import styled from "styled-components";
 import NavBar from "./components/NavBar";
+import { observer } from "mobx-react-lite";
+import { useStore } from "./store";
+import { check } from "./http/userApi";
 
 const AppContainer = styled.div`
   /* padding:20px; */
@@ -14,6 +17,28 @@ const AppContainer = styled.div`
 `;
 
 function App() {
+  const {
+    userStore: { user, setUser, setIsAuth },
+  } = useStore();
+
+  const [loading, setLoading] = useState(true);
+
+  console.log({ user });
+
+  useEffect(() => {
+    setTimeout(() => {
+      check()
+        .then(() => {
+          setUser(user);
+          setIsAuth(true);
+          console.log("fired in useEffect");
+        })
+        .finally(() => setLoading(false));
+    }, 1000);
+  }, []);
+
+  if (loading) return <h1>Loading...</h1>;
+
   return (
     <BrowserRouter>
       <AppContainer>
@@ -25,4 +50,4 @@ function App() {
   );
 }
 
-export default App;
+export default observer(App);

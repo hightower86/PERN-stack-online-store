@@ -32,8 +32,14 @@ const NavBar = () => {
   const history = useHistory();
 
   const {
-    userStore: { isAuth, setIsAuth, user },
+    userStore: { isAuth, setIsAuth, user, setUser },
   } = useStore();
+
+  const logout = () => {
+    setUser({});
+    localStorage.removeItem("token");
+    setIsAuth(false);
+  };
 
   return (
     <NavContainer>
@@ -45,17 +51,10 @@ const NavBar = () => {
             Админ панель
           </Button>
         )}
-        {!isAuth && <Button onClick={() => setIsAuth(true)}>Войти </Button>}
-        {isAuth && (
-          <Button
-            onClick={() => {
-              history.push(LOGIN_ROUTE);
-              setIsAuth(false);
-            }}
-          >
-            Выйти
-          </Button>
+        {!isAuth && (
+          <Button onClick={() => history.push(LOGIN_ROUTE)}>Войти </Button>
         )}
+        {isAuth && <Button onClick={logout}>Выйти</Button>}
       </ButtonsContainer>
     </NavContainer>
   );

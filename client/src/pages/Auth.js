@@ -1,11 +1,15 @@
 import { set } from "mobx";
 import React, { useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useHistory, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { login, registration } from "../http/userApi";
 import { useStore } from "../store";
 import Button from "../UI/Button";
-import { LOGIN_ROUTE, REGISTRATION_ROUTE } from "../utils/constants";
+import {
+  LOGIN_ROUTE,
+  REGISTRATION_ROUTE,
+  SHOP_ROUTE,
+} from "../utils/constants";
 
 const Container = styled.div`
   height: 90vh;
@@ -43,6 +47,8 @@ const Auth = () => {
   const location = useLocation();
   const isLogin = location.pathname === LOGIN_ROUTE;
 
+  const history = useHistory();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -54,11 +60,12 @@ const Auth = () => {
       } else {
         data = await registration({ email, password });
       }
+      setUser(data);
+      setIsAuth(true);
+      history.push(SHOP_ROUTE);
     } catch (e) {
       window.alert(e.response?.data?.message);
     }
-    setUser(data);
-    setIsAuth(true);
   };
 
   const handleSubmit = (e) => {
