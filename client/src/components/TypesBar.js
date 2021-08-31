@@ -32,7 +32,7 @@ const TypesBar = () => {
       fetchTypes()
         .then((data) => setTypes(data))
         .then(() => setLoading(false));
-    }, 2000);
+    }, 900);
   }, []);
 
   if (loading) return <h2>Loading...</h2>;

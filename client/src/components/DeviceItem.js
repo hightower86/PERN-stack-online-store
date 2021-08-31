@@ -43,7 +43,10 @@ const Device = ({ device }) => {
   return (
     <DeviceItem onClick={() => history.push(`${DEVICE_ROUTE}/${device.id}`)}>
       {device.name}
-      <Img src={device.img} alt={device.name} />
+      <Img
+        src={`${process.env.REACT_APP_API_URL}/${device.img}`}
+        alt={device.name}
+      />
       price: ${device.price} <br /> rating: {device.rating}
       <StyledButton onClick={handleToCartClick}>В корзину</StyledButton>
     </DeviceItem>

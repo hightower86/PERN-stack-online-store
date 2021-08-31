@@ -34,7 +34,7 @@ function App() {
           console.log("fired in useEffect");
         })
         .finally(() => setLoading(false));
-    }, 1000);
+    }, 600);
   }, []);
 
   if (loading) return <h1>Loading...</h1>;

@@ -7,7 +7,7 @@ import { SHOP_ROUTE } from "../utils/constants";
 
 const AppRouter = () => {
   const {
-    userStore: { user, isAuth },
+    userStore: { isAuth },
   } = useStore();
 
   return (
